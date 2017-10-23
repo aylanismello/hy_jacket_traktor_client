@@ -37,6 +37,13 @@ socket.on('connection', (client) => {
   client.on('stream', (stream, meta) => {
     stream.on('data', data => {
       console.log(data);
+      console.log(client);
+      // console.log(socket.clients);
+      // Object.keys(socket.clients).map(socketClient => {
+      //   console.log('made a stream!');
+      //   // debugger;
+      //   socket.clients[socketClient].createStream();
+      // });
     });
 
     stream.on('end', () => {
