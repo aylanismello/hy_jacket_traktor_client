@@ -27,10 +27,10 @@ let sound = 'tick';
 // });
 
 
-socket.on('connect', function (socket) {
-    console.log('Connected!');
-});
-socket.emit('CH01', 'me', 'test msg');
+// socket.on('connect', function (socket) {
+//     console.log('Connected!');
+// });
+// socket.emit('CH01', 'me', 'test msg');
 
 // const ws = new WebSocket('ws://127.0.0.1:3000/socket');
 //
