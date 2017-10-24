@@ -1,17 +1,30 @@
-const easymidi = require('easymidi');
-const inputs = easymidi.getInputs();
-const outputs = easymidi.getOutputs();
-const io = require('socket.io-client');
+var io = require('socket.io-client');
+var socket = io.connect('http://localhost:3000', {reconnect: true});
 
-const PULSES_PER_BEAT = 24;
-const socket = io.connect('http://localhost:3000', {reconnect: true});
-console.log(inputs);
-console.log(outputs);
+// Add a connect listener
+socket.on('connect', () => {
+    setInterval(() => {
+      // channel, from_address, data
+      socket.emit('CH01', 'me', 'test msg');
+    }, 1000)
+});
 
-const traktor = new easymidi.Input(inputs[2]);
-let beat = 1;
-let tick = 0;
-let sound = 'tick';
+
+
+// const easymidi = require('easymidi');
+// const inputs = easymidi.getInputs();
+// const outputs = easymidi.getOutputs();
+// const io = require('socket.io-client');
+//
+// const PULSES_PER_BEAT = 24;
+// const socket = io.connect('http://localhost:3000', {reconnect: true});
+// console.log(inputs);
+// console.log(outputs);
+//
+// const traktor = new easymidi.Input(inputs[2]);
+// let beat = 1;
+// let tick = 0;
+// let sound = 'tick';
 
 //
 // traktor.on('clock', () => {
