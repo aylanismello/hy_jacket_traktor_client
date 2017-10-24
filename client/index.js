@@ -1,7 +1,5 @@
 var io = require('socket.io-client');
-// var socket = io.connect('http://localhost:3000', {reconnect: true});
-// var socket = io.connect('http://midi-testz.herokuapp.com:23213', {reconnect: true});
-const url = process.env.NODE_ENV === 'production' ? 'http://104.236.137.60:3000' : 'http://localhost:3000';
+const url = process.env.NODE_ENV === 'production' ? 'http://104.236.137.60' : 'http://localhost:3000';
 
 var socket = io.connect(url, {reconnect: true});
 
