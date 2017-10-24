@@ -8,8 +8,9 @@ const PORT = process.env.PORT || 3000;
 io.on('connection', (socket) => {
    console.log('connected to server');
 
-  socket.on('CH01', (from, msg) => {
-    console.log('MSG', from, ' saying ', msg);
+  socket.on('tick', (from, msg) => {
+    console.log('MSG from', from, ' saying ', msg);
+    socket.emit('tick', { msg: msg });
   });
 
 });

@@ -1,6 +1,7 @@
 var io = require('socket.io-client');
-// var socket = io.connect('http://localhost:3000', {reconnect: true});
-var socket = io.connect('http://midi-testz.herokuapp.com:23213', {reconnect: true});
+var socket = io.connect('http://localhost:3000', {reconnect: true});
+// var socket = io.connect('http://midi-testz.herokuapp.com:23213', {reconnect: true});
+// var socket = io.connect('http://104.236.137.60:3000', {reconnect: true});
 
 // Add a connect listener
 const easymidi = require('easymidi');
@@ -21,7 +22,7 @@ let sound = 'tick';
 socket.on('connect', () => {
   traktor.on('clock', () => {
     if(tick % PULSES_PER_BEAT === 0) {
-      socket.emit('CH01', 'me', beat);
+      socket.emit('tick', 'traktor', beat);
       console.log(beat);
       if(beat === 4) {
         beat = 1;
@@ -31,4 +32,8 @@ socket.on('connect', () => {
     }
     tick++;
   });
+});
+
+socket.on('tick', (data) => {
+  console.log(data);
 });
