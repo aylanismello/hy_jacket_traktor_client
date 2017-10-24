@@ -1,7 +1,7 @@
 var io = require('socket.io-client');
-var socket = io.connect('http://localhost:3000', {reconnect: true});
+// var socket = io.connect('http://localhost:3000', {reconnect: true});
 // var socket = io.connect('http://midi-testz.herokuapp.com:23213', {reconnect: true});
-// var socket = io.connect('http://104.236.137.60:3000', {reconnect: true});
+var socket = io.connect('http://104.236.137.60:3000', {reconnect: true});
 
 // Add a connect listener
 const easymidi = require('easymidi');
