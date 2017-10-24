@@ -10,8 +10,8 @@ methodOverride = require('method-override'),
 http = require('http');
 
 var app = express();
-var server = app.listen(3000);
 var io = require('socket.io').listen(server); // this tells socket.io to use our express server
+var server = app.listen(3000, '0.0.0.0');
 const router = express.Router();
 
 // app.configure(function(){
