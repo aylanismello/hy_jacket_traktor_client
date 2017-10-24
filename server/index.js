@@ -11,7 +11,7 @@ http = require('http');
 
 var app = express();
 var io = require('socket.io').listen(server); // this tells socket.io to use our express server
-var server = app.listen(3000, '0.0.0.0');
+var server = app.listen(80, '0.0.0.0');
 const router = express.Router();
 
 // app.configure(function(){
