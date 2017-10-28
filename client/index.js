@@ -1,5 +1,6 @@
 var io = require('socket.io-client');
-const url = process.env.NODE_ENV === 'production' ? 'http://104.236.137.60' : 'http://localhost:3000';
+const HEROKU_DROPLET_URL = 'http://162.243.144.110';
+const url = process.env.NODE_ENV === 'production' ? HEROKU_DROPLET_URL : 'http://localhost:3000';
 
 var socket = io.connect(url, {reconnect: true});
 
@@ -20,6 +21,7 @@ let tick = 0;
 let sound = 'tick';
 
 socket.on('connect', () => {
+  console.log('connected to socket server');
   traktor.on('clock', () => {
     if(tick % PULSES_PER_BEAT === 0) {
       socket.emit('tick', 'traktor', beat);
