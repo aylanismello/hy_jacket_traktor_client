@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "easymidi": "^0.0.4",
+    "node-record-lpcm16": "^0.3.0",
+    "osx-audio": "^1.0.0",
     "socket.io-client": "^2.0.4"
   }
 }
