@@ -1,5 +1,7 @@
 const io = require('socket.io-client');
+// https://www.npmjs.com/package/socket.io-stream
 const ss = require('socket.io-stream');
+// https://github.com/gillesdemey/node-record-lpcm16
 const record = require('node-record-lpcm16')
 const fs = require('fs')
 
@@ -23,7 +25,6 @@ console.log(outputs);
 const traktor = new easymidi.Input(inputs[2]);
 let beat = 1;
 let tick = 0;
-let sound = 'tick';
 
 socket.on('connect', () => {
   ss(socket).emit('audio', audioStream, { name: 'whatever'})
