@@ -1,4 +1,12 @@
 var io = require('socket.io-client');
+var ss = require('socket.io-stream');
+
+var record = require('node-record-lpcm16')
+var fs = require('fs')
+
+var file = fs.createWriteStream('test.wav', { encoding: 'binary' })
+
+
 const HEROKU_DROPLET_URL = 'http://162.243.144.110';
 const url = process.env.NODE_ENV === 'production' ? HEROKU_DROPLET_URL : 'http://localhost:3000';
 
@@ -21,6 +29,8 @@ let tick = 0;
 let sound = 'tick';
 
 socket.on('connect', () => {
+  ss(socket).emit('audio', stream, { name: 'whatever'})
+
   console.log('connected to socket server');
   traktor.on('clock', () => {
     if(tick % PULSES_PER_BEAT === 0) {
