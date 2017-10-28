@@ -1,22 +1,19 @@
-var io = require('socket.io-client');
-var ss = require('socket.io-stream');
-
-var record = require('node-record-lpcm16')
-var fs = require('fs')
-
-var file = fs.createWriteStream('test.wav', { encoding: 'binary' })
-
+const io = require('socket.io-client');
+const ss = require('socket.io-stream');
+const record = require('node-record-lpcm16')
+const fs = require('fs')
 
 const HEROKU_DROPLET_URL = 'http://162.243.144.110';
 const url = process.env.NODE_ENV === 'production' ? HEROKU_DROPLET_URL : 'http://localhost:3000';
 
-var socket = io.connect(url, {reconnect: true});
+const socket = io.connect(url, {reconnect: true});
 
 // Add a connect listener
 const easymidi = require('easymidi');
 const inputs = easymidi.getInputs();
 const outputs = easymidi.getOutputs();
 
+const audioStream = ss.createStream();
   // 24 clock pulses per quarter note!
   // 96 clock pulses per downbeat!
 const PULSES_PER_BEAT = 24;
@@ -29,7 +26,8 @@ let tick = 0;
 let sound = 'tick';
 
 socket.on('connect', () => {
-  ss(socket).emit('audio', stream, { name: 'whatever'})
+  ss(socket).emit('audio', audioStream, { name: 'whatever'})
+  record.start().pipe(audioStream);
 
   console.log('connected to socket server');
   traktor.on('clock', () => {
