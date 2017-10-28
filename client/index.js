@@ -2,7 +2,7 @@ const io = require('socket.io-client');
 // https://www.npmjs.com/package/socket.io-stream
 const ss = require('socket.io-stream');
 // https://github.com/gillesdemey/node-record-lpcm16
-const record = require('node-record-lpcm16')
+const record = require('node-record-lpcm16');
 const fs = require('fs')
 
 const HEROKU_DROPLET_URL = 'http://162.243.144.110';
@@ -31,6 +31,11 @@ socket.on('connect', () => {
   record.start().pipe(audioStream);
 
   console.log('connected to socket server');
+
+  ss(socket).on('audio', function(audioStream, data) {
+    console.log('got audio back from server!');
+  })
+
   traktor.on('clock', () => {
     if(tick % PULSES_PER_BEAT === 0) {
       socket.emit('tick', 'traktor', beat);
